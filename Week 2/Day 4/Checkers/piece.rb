@@ -49,11 +49,15 @@ class Piece
       if board.on_board?(move) && !board[move].nil?
         next_space = increment(move, vector)
         if board.on_board?(next_space) && board[next_space].nil?
-          jumps << [move, next_space] if board[move].color != color
+          jumps << [next_space] if board[move].color != color
         end
       end
     end
 
     jumps
+  end
+
+  def moves
+    moves = get_jumps + get_slides
   end
 end

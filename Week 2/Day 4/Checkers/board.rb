@@ -19,9 +19,14 @@ class Board
       start_pos = respond_to_input
     end
     self.end_cursor = cursor
+  end_pos = nil
+    until board[end_pos].moves.include?(end_pos)
     end_pos = respond_to_input
     self.end_cursor = nil
     make_move(start_pos, end_pos)
+  end
+
+  def make_move
 
   end
 
