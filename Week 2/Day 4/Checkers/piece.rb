@@ -52,16 +52,21 @@ class Piece
   def get_jumps
     jumps = []
     vectors.each do |vector|
-      move = increment(position, vector)
-      if board.on_board?(move) && !board[move].nil?
-        next_space = increment(move, vector)
-        if board.on_board?(next_space) && board[next_space].nil?
-          jumps << next_space if board[move].color != color
-        end
-      end
+      next_space = jump_helper(vector)
+      jumps << next_space if next_space
     end
 
     jumps
+  end
+
+  def jump_helper(vector)
+    move = increment(position, vector)
+    return false unless board.on_board?(move) && !board[move].nil?
+    next_space = increment(move, vector)
+    return false unless board.on_board?(next_space) && board[next_space].nil?
+    return false unless board[move].color != color
+
+    next_space
   end
 
   def moves

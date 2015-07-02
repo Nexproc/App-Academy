@@ -21,16 +21,20 @@ class Board
     true
   end
 
+  #get move will allow the choice of a start position
+  #chain jumping forces the start position to be on
+  #the piece that is chain jumping.
   def get_move(start_pos = nil)
     until start_pos && valid_start_pos?(start_pos)
       start_pos = respond_to_input
     end
     self.cursor = start_pos
     self.end_cursor = self.cursor.dup
-  end_pos = nil
+    end_pos = nil
     until end_pos && self[start_pos].moves.include?(end_pos)
       end_pos = respond_to_input
     end
+    self.cursor = end_cursor
     self.end_cursor = nil
     move(start_pos, end_pos)
   end
@@ -60,20 +64,26 @@ class Board
   end
 
   def chain_jump(pos)
-    if self[pos].get_jumps.empty?
-      self[pos].jump_chain = false
-      return
+    unless self[pos].get_jumps.empty?
+      self[pos].jump_chain = true
+      get_move(pos)
     end
-    self[pos].jump_chain = true
-    get_move(pos)
+    self[pos].jump_chain = false
   end
 
+  #populate the board
   def add_pieces
+    #for each color
     [:red, :black].each do |color|
+      #choose side of the board based on current color
       start = color == :red ? 0 : -3
+      #populate three rows
       3.times do |i|
+        #account for offset in each row
         offset = (start + i) % 2 == 0 ? 1 : 0
+        #for each column - only 4 pieces - skip between spaces
         4.times do |c|
+          #true_start for setting the internal position of the pieces at -3
           true_start = start < 0 ? (8 + start) : start
           pos = [true_start + i, (c * 2) + offset]
           self[pos] = Piece.new(pos, color, self)
@@ -124,19 +134,16 @@ class Board
     active = end_cursor || cursor
     next_pos = [active[0] + vector[0], active[1] + vector[1]]
     return unless on_board?(next_pos)
-    if end_cursor.nil?
-      self.cursor = next_pos
-    else
-      self.end_cursor = next_pos
-    end
+    end_cursor ? self.cursor = next_pos : self.end_cursor = next_pos
   end
 
   def change_active_color
     team_colors.rotate!
   end
 
+  #keyboard input stuff
   # original case statement from:
-# http://www.alecjacobson.com/weblog/?p=75
+  # http://www.alecjacobson.com/weblog/?p=75
   def respond_to_input
     render
     loop do
