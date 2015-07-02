@@ -39,15 +39,24 @@ class Board
     jump = false
     if self[start_pos].get_jumps.include?(end_pos)
       jump = true
-      vectors = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
-      vectors.map! { |vector| vector / 2 }
-      middle = [start_pos[0] + vectors[0], start_pos[1] + vectors[1]]
-      self[middle] = EmptySquare.new
+      jump_piece(start_pos, end_pos)
     end
-    self[end_pos] = self[start_pos]
-    self[start_pos] = EmptySquare.new
-    self[end_pos].position = end_pos
+    place_piece(start_pos, end_pos)
     chain_jump(end_pos) if jump
+  end
+
+  def jump_piece(start, finish)
+    vectors = [finish[0] - start[0], finish[1] - start[1]]
+    vectors.map! { |vector| vector / 2 }
+    middle = [start[0] + vectors[0], start[1] + vectors[1]]
+    self[middle] = EmptySquare.new
+  end
+
+  def place_piece(start, finish)
+    self[finish] = self[start]
+    self[start] = EmptySquare.new
+    self[finish].position = finish
+    self[finish].promote
   end
 
   def chain_jump(pos)

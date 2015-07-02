@@ -5,7 +5,7 @@ class Piece
   BLACK_VECTORS = [ [-1, 1], [-1, -1] ]
   RED_VECTORS = [ [1, 1], [1, -1] ]
   attr_accessor :vectors, :symbol, :board, :position, :jump_chain
-  attr_reader :color
+  attr_reader :color, :king_row
   def initialize(pos, color, board)
     @board = board
     @position = pos
@@ -13,11 +13,13 @@ class Piece
     @vectors = Set.new
     @symbol = '☗'.colorize(color)
     @jump_chain = false
+    @king_row = color == :red ? 7 : 0
     get_move_set
   end
 
-  def toggle_jump_status
-    jump_chain = !jump_chain
+  def promote
+    row = position[0]
+    make_king if row == king_row
   end
 
   def to_s
