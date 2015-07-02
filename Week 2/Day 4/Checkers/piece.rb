@@ -4,15 +4,20 @@ require 'colorize'
 class Piece
   BLACK_VECTORS = [ [-1, 1], [-1, -1] ]
   RED_VECTORS = [ [1, 1], [1, -1] ]
-  attr_accessor :vectors, :symbol, :board
-  attr_reader :color, :position
+  attr_accessor :vectors, :symbol, :board, :position, :jump_chain
+  attr_reader :color
   def initialize(pos, color, board)
     @board = board
     @position = pos
     @color = color
     @vectors = Set.new
     @symbol = '☗'.colorize(color)
+    @jump_chain = false
     get_move_set
+  end
+
+  def toggle_jump_status
+    jump_chain = !jump_chain
   end
 
   def to_s
@@ -49,7 +54,7 @@ class Piece
       if board.on_board?(move) && !board[move].nil?
         next_space = increment(move, vector)
         if board.on_board?(next_space) && board[next_space].nil?
-          jumps << [next_space] if board[move].color != color
+          jumps << next_space if board[move].color != color
         end
       end
     end
@@ -58,6 +63,10 @@ class Piece
   end
 
   def moves
-    moves = get_jumps + get_slides
+    if jump_chain
+      return get_jumps
+    end
+
+    get_jumps + get_slides
   end
 end

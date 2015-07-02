@@ -13,35 +13,49 @@ class Board
     @team_colors = [:red, :black]
   end
 
+  def valid_start_pos?(pos)
+    return false if self[pos].nil?
+    return false if self[pos].color != team_colors.first
+    return false if self[pos].moves.empty?
+
+    true
+  end
+
   def get_move(start_pos = nil)
-    while board[start_pos].nil? && board[start_pos].color != team_colors.first
+    until start_pos && valid_start_pos?(start_pos)
       start_pos = respond_to_input
     end
-    cursor = start_pos
-    self.end_cursor = cursor
+    self.cursor = start_pos
+    self.end_cursor = self.cursor.dup
   end_pos = nil
-    until board[end_pos].moves.include?(end_pos)
+    until end_pos && self[start_pos].moves.include?(end_pos)
       end_pos = respond_to_input
     end
     self.end_cursor = nil
     move(start_pos, end_pos)
-    change_active_color
   end
 
   def move(start_pos, end_pos)
-    if board[start_pos].get_jumps.include?(end_pos)
+    jump = false
+    if self[start_pos].get_jumps.include?(end_pos)
+      jump = true
       vectors = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
       vectors.map! { |vector| vector / 2 }
       middle = [start_pos[0] + vectors[0], start_pos[1] + vectors[1]]
-      board[middle] = EmptySquare.new
+      self[middle] = EmptySquare.new
     end
-    board[end_pos] = board[start_pos]
-    board[start_pos] = EmptySquare.new
-    chain_jump(end_pos)
+    self[end_pos] = self[start_pos]
+    self[start_pos] = EmptySquare.new
+    self[end_pos].position = end_pos
+    chain_jump(end_pos) if jump
   end
 
   def chain_jump(pos)
-    return if board[pos].get_jumps.empty?
+    if self[pos].get_jumps.empty?
+      self[pos].jump_chain = false
+      return
+    end
+    self[pos].jump_chain = true
     get_move(pos)
   end
 
@@ -77,8 +91,8 @@ class Board
     grid_string = []
     grid.each_with_index do |row, i|
       row_string = row.map.with_index do |el, c|
-        if !end_cursor.nil? && end_cursor == [i, c]
-          el.to_s.colorize( :background => :green )
+        if self.end_cursor && self.end_cursor == [i, c]
+          next el.to_s.colorize( :background => :green )
         end
         if cursor == [i, c]
           el.to_s.colorize( :background => :green )
@@ -98,12 +112,13 @@ class Board
   end
 
   def move_cursor(vector)
-    next_pos = [cursor[0] + vector[0], cursor[1] + vector[1]]
+    active = end_cursor || cursor
+    next_pos = [active[0] + vector[0], active[1] + vector[1]]
     return unless on_board?(next_pos)
     if end_cursor.nil?
       self.cursor = next_pos
     else
-      self.end_cursor = nex_pos
+      self.end_cursor = next_pos
     end
   end
 
@@ -114,24 +129,20 @@ class Board
   # original case statement from:
 # http://www.alecjacobson.com/weblog/?p=75
   def respond_to_input
-    self.render
+    render
     loop do
-      self.render
+      render
       c = read_char
       case c
         when "\r"
           return end_cursor || cursor
         when "\e[A"
-          self.render
           move_cursor([-1, 0])
         when "\e[B"
-          self.render
           move_cursor([1, 0])
         when "\e[C"
-          self.render
           move_cursor([0, 1])
         when "\e[D"
-          self.render
           move_cursor([0, -1])
         when "\u0003"
           raise Interrupt
