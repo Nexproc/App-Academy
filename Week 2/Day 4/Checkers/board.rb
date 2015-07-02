@@ -13,21 +13,36 @@ class Board
     @team_colors = [:red, :black]
   end
 
-  def get_move
-    start_pos = nil
-    while board[start_pos].nil?
+  def get_move(start_pos = nil)
+    while board[start_pos].nil? && board[start_pos].color != team_colors.first
       start_pos = respond_to_input
     end
+    cursor = start_pos
     self.end_cursor = cursor
   end_pos = nil
     until board[end_pos].moves.include?(end_pos)
-    end_pos = respond_to_input
+      end_pos = respond_to_input
+    end
     self.end_cursor = nil
-    make_move(start_pos, end_pos)
+    move(start_pos, end_pos)
+    change_active_color
   end
 
-  def make_move
+  def move(start_pos, end_pos)
+    if board[start_pos].get_jumps.include?(end_pos)
+      vectors = [end_pos[0] - start_pos[0], end_pos[1] - start_pos[1]]
+      vectors.map! { |vector| vector / 2 }
+      middle = [start_pos[0] + vectors[0], start_pos[1] + vectors[1]]
+      board[middle] = EmptySquare.new
+    end
+    board[end_pos] = board[start_pos]
+    board[start_pos] = EmptySquare.new
+    chain_jump(end_pos)
+  end
 
+  def chain_jump(pos)
+    return if board[pos].get_jumps.empty?
+    get_move(pos)
   end
 
   def add_pieces
@@ -63,17 +78,18 @@ class Board
     grid.each_with_index do |row, i|
       row_string = row.map.with_index do |el, c|
         if !end_cursor.nil? && end_cursor == [i, c]
-          el.to_s.colorize(:background => :green)
+          el.to_s.colorize( :background => :green )
         end
         if cursor == [i, c]
-          el.to_s.colorize(:background => :green)
+          el.to_s.colorize( :background => :green )
+        elsif self[cursor].moves.include?([i, c]) && self[cursor].color == team_colors.first
+          el.to_s.colorize( :background => :cyan )
         else
-          el.to_s.colorize(:background => colors[(c+i) % 2])
+          el.to_s.colorize( :background => colors[(c+i) % 2] )
         end
       end
       grid_string << row_string
     end
-
     grid_string.each_with_index {|row, i| puts "#{(i + 1).to_s} #{row.join}"}
   end
 
@@ -92,7 +108,7 @@ class Board
   end
 
   def change_active_color
-    team_colors.rotate
+    team_colors.rotate!
   end
 
   # original case statement from:

@@ -7,6 +7,10 @@ class EmptySquare
     "   "
   end
 
+  def moves
+    []
+  end
+
   def color
     nil
   end
