@@ -68,7 +68,7 @@ class Board
       self[pos].jump_chain = true
       get_move(pos)
     end
-    self[pos].jump_chain = false
+    self[pos].jump_chain = false unless self[pos].nil?
   end
 
   #populate the board
@@ -134,7 +134,7 @@ class Board
     active = end_cursor || cursor
     next_pos = [active[0] + vector[0], active[1] + vector[1]]
     return unless on_board?(next_pos)
-    end_cursor ? self.cursor = next_pos : self.end_cursor = next_pos
+    self.end_cursor ? self.end_cursor = next_pos : self.cursor = next_pos
   end
 
   def change_active_color
