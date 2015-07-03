@@ -68,7 +68,7 @@ class Board
       self[pos].jump_chain = true
       get_move(pos)
     end
-    self[pos].jump_chain = false unless self[pos].nil?
+    self[pos].jump_chain = false
   end
 
   #populate the board

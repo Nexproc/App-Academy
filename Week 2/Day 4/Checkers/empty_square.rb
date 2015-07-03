@@ -1,4 +1,6 @@
 class EmptySquare
+  attr_accessor :jump_chain
+
   def nil?
     true
   end
