@@ -4,8 +4,10 @@ require 'colorize'
 class Piece
   BLACK_VECTORS = [ [-1, 1], [-1, -1] ]
   RED_VECTORS = [ [1, 1], [1, -1] ]
+
   attr_accessor :vectors, :symbol, :board, :position, :jump_chain
   attr_reader :color, :king_row
+
   def initialize(pos, color, board)
     @board = board
     @position = pos

@@ -7,18 +7,14 @@ class Board
   attr_accessor :grid, :cursor, :end_cursor, :team_colors
 
   def initialize
-    @grid = Array.new(8) { Array.new(8) { EmptySquare.new }}
-    add_pieces
-    @cursor = [0, 0]
+    @grid = Array.new(8) { Array.new(8) { EmptySquare.new } }
     @team_colors = [:red, :black]
+    @cursor = [0, 0]
+    populate
   end
 
   def valid_start_pos?(pos)
-    return false if self[pos].nil?
-    return false if self[pos].color != team_colors.first
-    return false if self[pos].moves.empty?
-
-    true
+    !self[pos].nil? && !self[pos].moves.empty? && self[pos].color == team_colors.first
   end
 
   #get move will allow the choice of a start position
@@ -44,9 +40,10 @@ class Board
     if self[start_pos].get_jumps.include?(end_pos)
       jump = true
       jump_piece(start_pos, end_pos)
+      chain_jump(end_pos)
+    else
+      place_piece(start_pos, end_pos)
     end
-    place_piece(start_pos, end_pos)
-    chain_jump(end_pos) if jump
   end
 
   def jump_piece(start, finish)
@@ -54,6 +51,7 @@ class Board
     vectors.map! { |vector| vector / 2 }
     middle = [start[0] + vectors[0], start[1] + vectors[1]]
     self[middle] = EmptySquare.new
+    place_piece(start, finish)
   end
 
   def place_piece(start, finish)
@@ -71,23 +69,22 @@ class Board
     self[pos].jump_chain = false
   end
 
-  #populate the board
-  def add_pieces
-    #for each color
-    [:red, :black].each do |color|
-      #choose side of the board based on current color
-      start = color == :red ? 0 : -3
-      #populate three rows
-      3.times do |i|
-        #account for offset in each row
-        offset = (start + i) % 2 == 0 ? 1 : 0
-        #for each column - only 4 pieces - skip between spaces
-        4.times do |c|
-          #true_start for setting the internal position of the pieces at -3
-          true_start = start < 0 ? (8 + start) : start
-          pos = [true_start + i, (c * 2) + offset]
-          self[pos] = Piece.new(pos, color, self)
-        end
+  def populate
+    self.team_colors.each {|color| add_pieces(color)}
+  end
+
+  def add_pieces(color)
+    start = color == :red ? 0 : -3
+    #populate three rows
+    3.times do |i|
+      #account for offset in each row
+      offset = (start + i) % 2 == 0 ? 1 : 0
+      #for each column - only 4 pieces - skip between spaces
+      4.times do |c|
+        #true_start for setting the internal position of the pieces at -3
+        true_start = start < 0 ? (8 + start) : start
+        pos = [true_start + i, (c * 2) + offset]
+        self[pos] = Piece.new(pos, color, self)
       end
     end
   end
