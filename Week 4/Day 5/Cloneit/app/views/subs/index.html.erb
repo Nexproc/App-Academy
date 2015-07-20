@@ -1,0 +1,5 @@
+<h1>All SubCloneits</h1>
+<% @subs.each do |sub|%>
+  <p>Title: <%= link_to sub.title, sub_url(sub.id) %></p>
+  <p>Description: <%= sub.description %></p>
+<% end %>

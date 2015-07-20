@@ -1,0 +1,4 @@
+<% @bands.each do |band| %>
+  <p><%= link_to "#{band.name} Albums", band_url(band.id)%></p>
+<% end %>
+<%= link_to "Create Band", new_band_url %>

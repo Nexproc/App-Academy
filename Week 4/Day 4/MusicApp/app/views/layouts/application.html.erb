@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%=flash[:errors] if flash[:errors]%>
+  <% if content_for? :header %>
+    <%= :header %>
+  <% else %>
+    <title>MusicApp</title>
+  <% end %>
+  <%if current_user%>
+    <%= button_to "Logout", logout_session_url%>
+  <%else%>
+    <%= link_to "Sign In", new_sessions_url%>
+  <% end %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+<h1> <%= @band.name %> </h1>
+<ul>
+  <% @band.albums.each do |album| %>
+    <li> <%= album.name %> (<%= album.syle %>) </li>
+  <% end %>
+</ul>
+<%= link_to "Create Album", new_band_album_url(@band) %>
