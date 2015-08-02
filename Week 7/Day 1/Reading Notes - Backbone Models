@@ -1,0 +1,47 @@
+MODEL CREATION
+-declare models as; var ModelName = Backbone.Model.extend({ model details! });
+INITIALIZE
+-Any function starting with initialize: function() { do stuff; } will be done when the model is generated.
+MODEL FUNCTIONS
+-Functions can be declared when the model is generated using functionName: function() { do this thing! };
+DEFAULTS
+-Default options can be declared using a default options hash; defaults: { name: "Frank", sex: "Lady Person" }
+CREATING A MODEL OBJECT
+-options can be set when the model is created; var dude = new Human( { name: "Jill", sex: "Man Person" } )
+--options can also be set after the model is created using an options hash;
+---var dudette = new Human();
+---dudette.set( { name: "Peach", sex: "Bowser" } )
+GETTING INDIVIDUAL ATTRIBUTES
+-the attributes of a model can be acquired useing; dudette.get("name") => "Peach"
+ACTION TRIGGERS
+-can set actions to trigger within initialize!
+--initialize: function () {
+---this.on("change:name", function (model) {
+----Do stuff because you changed the name of this person!
+---});
+--}
+SAVING
+-saving an existing model is as easy as; dudette.save();
+-making a model based on an existing database object; var dudette = new Human({id: 1});
+--just use the primary key in the options hash to find the object you're looking for!
+UPDATING
+-to update the model, just change the model that you have retrieved and use the same save function as before.
+--If a primary key is present, Backbone will update the existing data.
+DESTROYING
+-to destroy a model, first use the method above to retrieve an existing piece of data and then; dudette.destroy();
+--this will delete it form the database
+ATTRIBUTES
+-getting all of the current attributes can be done in a few ways.
+--var attr = dudette.toJSON(); <= this returns a JSON options hash representaiton of the model.
+--var attr = dudette.attributes <= gives direct access to the attibutes hash in the model.
+---Backbone documentation recommends being careful to not edit any attributes this way and instead defaulting to using a .set() command.
+VALIDATION
+-validate: function (attributes) {
+--if ( attributes.name === "Lemongrab" ) { return "unacceptAAABBLLE!!!!" };
+-};
+-initialize: function () {
+--/* do making this thing stuff */
+--this.bind("error", function (model, error) {
+---alert( error );
+--});
+-};

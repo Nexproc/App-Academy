@@ -1,0 +1,8 @@
+CREATING A VIEW TEMPLATE
+-var MyView = Backbone.View.extend({/* view stuff */});
+CREATING A VIEW OBJECT
+-var thisView = new MyView({ el: $jQueryObject });
+--the rest of the tutorials on the Backbone website are not as descriptive and are really just examples,
+--directly copying down these examples is rather wasteful, so here's a link in case I need to reference them!
+https://backbonetutorials.com/
+Boom.

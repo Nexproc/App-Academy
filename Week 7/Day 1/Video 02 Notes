@@ -1,0 +1,8 @@
+-Backbone dev also created Underscore, it's necessary to use Backbone.
+-Google Underscore and Backbone and download them.
+-Javascript code that is written by other people should go into vendor/assets/javascripts
+-application.js is the manifest file: It's where we require the javascript files that we need (//= require filename)
+-root= root to: "site#root"
+--create a root.html.erb page
+-window.Class.Models.Class = Backbone.model.extend()
+--extent iterates through each of the attributes
