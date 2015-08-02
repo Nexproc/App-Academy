@@ -4,7 +4,6 @@ require_relative '01_sql_object'
 module Searchable
   def where(params)
     q_marks = params.map{|key, _| "#{key} = ?"}.join(" AND ")
-    puts q_marks
     results = DBConnection.execute(<<-SQL, *params.values)
       SELECT *
       FROM #{table_name}

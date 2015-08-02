@@ -1,0 +1,5 @@
+-General Rails setup is mostly the same: do authentication-style work.
+-Backbone uses AJAX to communicate with the JavaScript
+-When writing routes include namespace api
+-Can wrap controllers in module API, but it's cleaner to declare the name as API::GenericsController
+-Declare option keys in quotes { "key": value }
