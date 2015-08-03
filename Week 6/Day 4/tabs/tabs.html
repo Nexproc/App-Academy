@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Our Cool Website</title>
+  </head>
+  <body>
+
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+  <link href="./tabs.css" rel="stylesheet" type="text/css">
+  <script src="./jquery-2.1.1.js"></script>
+  <script src="./tabs.js"></script>
+  <script>
+    $(function() {
+    $('.tabs').tabs();
+    })
+  </script>
+
+  <ul class='tabs' data-content-tabs=".content-tabs">
+    <li><a href="javascript:void(0)" for='#fate-reforged' class="active">Fate Reforged</a></li>
+    <li><a href="javascript:void(0)" for='#dragons'>Dragons</a></li>
+    <li><a href="javascript:void(0)" for='#duel-decks'>Duel Decks Elspeth vs. Kiora</a></li>
+  </ul>
+
+  <div class="content-tabs">
+    <div class="tab-pane active" id="fate-reforged">
+      <p>
+        Fate Reforged was announced at the Wizards of the Coast panel at PAX Prime on August 31, 2014. [2] It contains 185 cards (10 basic lands [3] [4], 70 commons, 60 uncommons, 35 rares, 10 mythic rares) and includes randomly inserted premium versions of all cards. The expansion symbol of the set is a stylized representation of two opposing planes or realities because the large sets of the block represent alternative timelines. This middle set, representing the past, is the precursor to both. The set had to be designed so it worked mechanically with both Khans of Tarkir and Dragons of Tarkir. [5] It is designed to be drafted with both large sets, while the large sets are never drafted together. Fate Reforged draft is one pack of Fate Reforged and then two packs of Khans of Tarkir. [6].
+      </p>
+    </div>
+    <div class="tab-pane" id="dragons">
+      <p>
+        Dragons of Tarkir is designed to be drafted with Fate Reforged but not with Khans of Tarkir [2]. Also, Dragons of Tarkir will not rotate out of Standard with Khans of Tarkir and Fate Reforged, but instead will rotate out with Magic Origins due to Standard's regulation changes. To differentiate the drafting experience from Khans of Tarkir / Fate Reforged, Dragons of Tarkir was designed around 5 sets of allied color pairs.[3]
+      </p>
+    </div>
+    <div class="tab-pane" id="duel-decks">
+      <p>
+        The knight Planeswalker Elspeth Tirel sees herself as the protector of the Multiverse. She has pledged her sword and shield to all who suffer, and she summons forth impressive armies to assist her. The merfolk Planeswalker Kiora calls upon the creatures of the deepest oceans to fight at her side. She is the master of the world beneath the waves, her true power only now beginning to surface. How will these Planeswalkers measure up when they meet in battle?
+      </p>
+    </div>
+  </div>
+  </body>
+</html>

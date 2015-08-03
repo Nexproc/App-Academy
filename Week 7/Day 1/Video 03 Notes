@@ -1,0 +1,3 @@
+-Collections are basically the same as a has-many or belongs-to in ActiveRecord.
+-Backbone.Collection.extend({ */same basic setup as a model, but you must also specify a */ model: thisModel /* to use in the collection */ })
+-in the namespace, a collection would be as such; window.List.Collection.Items = /* the above line */

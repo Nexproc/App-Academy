@@ -1,0 +1,9 @@
+<% follow_state = user.followers.include?(current_user) %>
+
+<button class="follow-toggle" data-followed="<%=follow_state%>" id="<%=user.id%>"></button>
+
+<script type="text/javascript">
+  $(function () {
+    $("button.follow-toggle").followToggle();
+  });
+</script>

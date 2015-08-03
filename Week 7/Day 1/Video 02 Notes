@@ -5,4 +5,6 @@
 -root= root to: "site#root"
 --create a root.html.erb page
 -window.Class.Models.Class = Backbone.model.extend()
---extent iterates through each of the attributes
+ROUTING
+-url: ("/api/things" | "api/thing/" + thing.get("id") | "api/thing/" + thing.get("id") + "/subThings")
+--basically just set url to whatever it would be in routes.

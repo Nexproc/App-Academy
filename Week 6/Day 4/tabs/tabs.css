@@ -1,0 +1,18 @@
+.tabs .active {
+  font-weight: bold;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display:block;
+  transition: 700ms;
+}
+
+.transitioning {
+  display: block;
+  opacity: 0;
+  transition: 700ms;
+}

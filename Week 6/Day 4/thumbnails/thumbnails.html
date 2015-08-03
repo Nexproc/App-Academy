@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.17.2/build/cssreset/cssreset-min.css">
+    <link href="./thumbnails.css" rel="stylesheet" type="text/css">
+    <script src="../tabs/jquery-2.1.1.js"></script>
+    <script src="./thumbnails.js"></script>
+    <script>
+      $(function() {
+      $('.thumbnails').thumbnails();
+      })
+    </script>
+
+    <div class="thumbnails">
+      <div class="active"></div>
+      <div class="gutter">
+        <a href="#" class="nav">&lt</a>
+        <div class="gutter-images">
+          <img src="./imgs/dragon.jpeg">
+          <img src="./imgs/gideon.jpeg">
+          <img src="./imgs/infantry.jpeg">
+          <img src="./imgs/lilliana.jpeg">
+          <img src="./imgs/angel.jpeg">
+          <img src="./imgs/archive.jpeg">
+          <img src="./imgs/heirarch.jpeg">
+          <img src="./imgs/myth.jpeg">
+          <img src="./imgs/timewalk.jpeg">
+        </div>
+        <a href="#" class="nav">&gt</a>
+      </div>
+    </div>
+  </body>
+</html>

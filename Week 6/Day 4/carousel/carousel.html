@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <script src="../tabs/jquery-2.1.1.js"></script>
+    <script src="./carousel.js"></script>
+    <link href="./carousel.css" rel="stylesheet" type="text/css">
+
+    <script>
+      $(function() {
+      $('.carousel').carousel();
+      })
+    </script>
+
+    <div class="carousel">
+      <div class="items">
+        <img src="./imgs/dragon.jpeg" class="active">
+        <img src="./imgs/gideon.jpeg">
+        <img src="./imgs/infantry.jpeg">
+        <img src="./imgs/lilliana.jpeg">
+      </div>
+
+      <a href="javascript:void(0)" class="slide-right">Prev</a>
+      <a href="javascript:void(0)" class="slide-left">Next</a>
+    </div>
+  </body>
+</html>
