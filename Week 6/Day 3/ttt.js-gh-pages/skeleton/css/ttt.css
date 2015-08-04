@@ -1,0 +1,78 @@
+.cell {
+  float: left;
+  border-bottom: solid black 10px;
+  border-right: solid black 10px;
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+}
+
+.cell.unclicked {
+  transition: 500ms;
+}
+
+.grid {
+  border-top: solid black 10px;
+  border-left: solid black 10px;
+  margin: 0px auto;
+  padding: 0px;
+  width: 330px;
+}
+
+.cell.unclicked:hover {
+  background-color: yellow;
+}
+
+.row {
+  position: relative;
+  display: block;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.x {
+  background-color: white;
+  color: blue;
+}
+
+.o {
+  background-color: white;
+  color: purple;
+}
+
+.x p, .o p {
+  margin: 47px 41px;
+  transform: translate(-50%, -50%);
+  font-family: "Roboto", sans-serif;
+  font-size: 60px;
+  font-weight: 900;
+}
+
+.cell.winner {
+  background-color: teal;
+  transition: 1000ms;
+}
+
+.cell.finished {
+  background-color: white;
+  transition: 1000ms;
+}
+
+h1 {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 46px;
+}
+
+footer {
+  padding-top: 30px;
+  font-weight: bolder;
+  font-family: "Roboto", sans-serif;
+  display: block;
+  text-align: center;
+  font-size: 48px;
+}

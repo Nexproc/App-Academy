@@ -1,0 +1,17 @@
+BackboneExamples.View.ExamplesIndex = Backbone.Views.extend({
+  initialize: function (options) {
+    this.exampleStyle = options.exampleStyle;
+    this.listenTo(this.collection, "reset add", this.render);
+  },
+  template: ['examples/index'],
+  render: function () {
+    var content = this.template({examples: this.collection});
+    this.$el.html(content);
+    return this;
+  }
+});
+
+var view = new BackboneExamples.Views.ExamplesIndex({
+  collection: BackboneExamples.examples,
+  exampleStyle: 'fun'
+});

@@ -1,4 +1,4 @@
 NERDCABULARY
 --Backbone views are more like Rails controllers
 --Backbone templates are basically Views in Rails
--gem 'ejs'
+-gem 'ejs' => The javascript version of ERB - replaced with Node?

@@ -1,0 +1,68 @@
+.towers {
+  position: relative;
+  margin: 0px auto;
+  width: 390px;
+  bottom: -100px;
+  padding: 0px;
+}
+
+.stack {
+  bottom: 0px;
+  border-bottom: solid black 10px;
+  width: 100px;
+  float: left;
+  margin: 0px 10px;
+  min-height: 150px;
+  transition: 500ms;
+  border-bottom-right-radius: 10px;  
+  border-bottom-left-radius: 10px;
+}
+
+.stack.selected {
+  border-color: red;
+}
+
+.disc.hidden {
+  transition: none;
+}
+
+.disc {
+  height: 50px;
+  margin: 0px auto;
+  border-radius: 13px;
+  margin-bottom: 3px;
+  transition: 500ms;
+}
+
+.disc.s1 {
+  width: 50px;
+  background-color: blue;
+}
+
+.disc.s2 {
+  width: 75px;
+  background-color: yellow;
+}
+
+.disc.s3 {
+  width: 98px;
+  background-color: green;
+}
+
+h1 {
+  text-align: center;
+  font-size: 46px;
+}
+
+footer {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 48px;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
