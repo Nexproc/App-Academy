@@ -1,0 +1,7 @@
+BLOOM FILTERS
+-win95 MSWord SpellChecker
+  Uses Bloom Filter to save memory.
+-What is a Hash Function?
+  A function that converts some object into a hash value - basically just a number.
+-Murmur?
+-Bitmap

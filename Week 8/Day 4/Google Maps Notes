@@ -1,0 +1,11 @@
+GOOGLE MAPS
+-check out google maps demo in AA repo
+-figaro install: makes config/application a YAML file,
+--drop any API keys into the figaro file and it will be hashed
+--<% api_key = "ley=ENV[GOOLE_API]" %>
+-declared with new google.maps.Map(document.getElementById('element'))
+-place the element in the DOM, then initialize the map - otherwise it will not appear.
+-the map container must fill 100% of its parent div
+-map locations can be stored in the database with longitude and latitude floats
+-when in doubt, check out the google maps documentation
+-google.maps.addListener(this._map, 'click', function_to_do)
