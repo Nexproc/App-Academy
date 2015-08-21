@@ -1,0 +1,45 @@
+::logarithmicer::
+Building a HashMap From Scratch
+Set - Collection of unordered objects
+ADT - Abstract Data Type
+ADT v Data Structure
+
+First Attempt:
+Take the operand and modulo it by the number of available buckets in the hash-map.
+3%5 = 3
+=>[[][][][3][]]
+
+Second Attempt: The smart set - should resize itself.
+-same as first attempt
+-resize when number of elements in the set is equal to the number of buckets in the set.
+  -this requires rehashing the current elements in the set.
+
+
+Time Complexity
+-Best Case
+-Worst Case
+-Average Case - AMT Time Complexity
+
+-hashmanp is essentially linear
+
+LinkedList (Yay!)
+
+[link]->[link]->[link]->[link]
+
+class LinkedList
+  def initialize
+    @head = Node.new
+    self.previous = @head;
+  end
+
+  def add-link(node)
+    self.previous.next = node
+    self.previous = node;
+  end
+end
+
+h = {}
+
+h["a"] = 1
+   /\
+a.hash % buckets = position in h
