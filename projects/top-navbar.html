@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <title>Navbar Demo</title>
+    <style>
+      body {
+        background: linear-gradient(to top, black, white);
+        width: 100%;
+        margin: 0;
+        height: 2000px;
+      }
+
+      div.navbar {
+        position: relative;
+        padding: 10px;
+        width: 100%;
+        background: linear-gradient(to bottom, black, grey);
+        border: none;
+        height: 30px;
+        border-radius: 0;
+      }
+      .navbar.fixed {
+        position: fixed;
+        top: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="page-header"><h1>This is the top!</h1></div>
+    <div class="navbar">
+      <div class="btn btn-primary">stuff</div>
+      <div class="btn btn-default">moar stuff</div>
+    </div>
+    <script>
+    var $window = $(window)
+    $(document).ready(function () {
+      var $navbar = $(".navbar");
+      var navTop = $navbar.offset().top;
+      function scrollDown(e) {
+          if (window.pageYOffset > navTop) {
+            $navbar.addClass("fixed");
+            $window.off("scroll", scrollDown);
+            $window.on("scroll", scrollUp);
+          }
+      };
+      function scrollUp(e) {
+        if (window.pageYOffset <= navTop) {
+          $navbar.removeClass("fixed")
+          $window.off("scroll", scrollUp);
+          $window.on("scroll", scrollDown);
+        }
+      };
+      $window.on("scroll", scrollDown);
+    });
+    </script>
+  </body>
+</html>

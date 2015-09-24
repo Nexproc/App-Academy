@@ -1,0 +1,12 @@
+#fibs takes a number and returns that many values from the fib sequence
+#fibs(3) => 0, 1, 1
+#fibs(6) => 0, 1, 1, 2, 3, 5
+def fibs(num, memoized_branches={0 => [], 1 => [0], 2 => [0, 1]})
+  return [] if num <= 0
+  return [0, 1][0..num - 1] if num <= 2
+  memoized_branches[num - 1] = fibs(num - 1, memoized_branches)
+  right = memoized_branches[num - 2]
+  left = memoized_branches[num - 1]
+  sequence = [left, left.last + right.last].flatten
+  sequence
+end
