@@ -9,9 +9,9 @@ module RowCollector
     grid.transpose
   end
 
-  #[ [1, 2, 3, 4]
-  #  [5, 6, 7, 8]
-  # [9, 10, 11, 12] ]
+  # [ [1, 2, 3, 4]
+  #   [5, 6, 7, 8]
+  #  [9, 10, 11, 12] ]
   def collect_diags_up(grid) #=[1][5, 2][9, 6, 3][10, 7, 4][11, 8][12]
     diags = []
     height = grid.size

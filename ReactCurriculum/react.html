@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <title>Wat?</title>
+  </head>
+  <body>
+    <div id="my-component"><div>
+    <script>
+    var ClickCounter = React.createClass({
+      getInitialState: function(){ return {count: 0}; },
+      click: function(event){
+        event.preventDefault();
+        this.setState({count: this.state.count + 1});
+      },
+      render: function(){
+        return ( React.createElement('div', {},
+          React.createElement('button', {onClick: this.click}, "CLICK ME"),
+          React.createElement('span', {}, this.state.count)
+        ));
+      }});
+    React.render(
+      React.createElement(ClickCounter, {}, ""),
+      document.getElementById('my-component')
+    );
+    </script>
+  </body>
+</html>
