@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <title>Nav Manu</title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/jsx">
+    var Menu = React.createClass({
+      getInitialState: function() { return { focused: 0 }; },
+      clicked: function (index) { this.setState({ focused: index }); },
+      render: function () {
+        var that = this;
+        return (
+          <div>
+            <ul> { this.props.items.map(function(m, index) {
+                var style = '';
+                if (self.state)
+              })}
+            </ul>
+            <p>Selected: {this.props.items[this.state.focused]}</p>
+          </div>
+        )
+      }
+    });
+  </script>
+</html>

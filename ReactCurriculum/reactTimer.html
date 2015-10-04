@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <title>Timer!</title>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/jsx">
+    var Timer = React.createClass({
+      getInitialState: function () { return {elapsed: 0}; },
+      componentDidMount: function () { this.timer = setInterval(this.tick, 50); },
+      componentWillUnmount: function () { clearInterval(this.timer); },
+      tick: function () { this.setState({ elapsed: new Date() - this.props.start}); },
+      render: function () {
+        var elapsed = Math.round(this.state.elapsed/100);
+        var seconds = (elapsed/10).toFixed(1);
+        return <p>This example was started <b>{seconds} seconds</b> ago.</p>
+      }
+    });
+
+    React.render(
+      <Timer start={Date.now()} />,
+      document.body
+    );
+  </script>
+</html>
